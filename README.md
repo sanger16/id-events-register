@@ -2,7 +2,7 @@
 
 ---
 
-The app is based in the popular framework web Express.js aand combine the ORM capacity of Sequelize to manage database models. This app allows to register any ID (in this case car plate ID) and then register an event related to that ID once per day.
+The app is based on the popular framework web Express.js aand combine the ORM capacity of Sequelize to manage database models. This app allows to register any ID (in this case car plate ID) and then register an event related to that ID once per day.
 
 Roles:
 
