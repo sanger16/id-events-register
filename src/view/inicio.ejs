@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesi&oacute;n</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/img/icon.png" type="image/png">
+
+    <!-- <script src="/js/script.js"></script> -->
+</head>
+
+<body>
+    <% if (errors) { %>
+        <section class="error">
+            <% errors.forEach(error=> { %>
+                <p>
+                    <%= error.msg %>
+                </p>
+                <% }); %>
+        </section>
+        <% } %>
+            <% if (msg) { %>
+                <section class="messages">
+                    <% msg.forEach(m=> { %>
+                        <p>
+                            <%= m %>
+                        </p>
+                        <% }); %>
+                </section>
+                <% } %>
+                    <section class="panel">
+                        <img src="/img/logo.webp" alt="logo">
+                        <h3>Inicio de sesi&oacute;n</h3>
+                        <form id="login" method="post" action="/login">
+                            <div class="container">
+                                <section>
+                                    <label for="username">Usuario</label>
+                                    <input id="username" name="username" type="text" required>
+                                </section>
+                                <section>
+                                    <label for="password">Contraseña</label>
+                                    <input id="password" name="password" type="password" required>
+                                </section>
+                            </div>
+                            <button class="search" type="submit">Iniciar Sesi&oacute;n</button>
+                        </form>
+                    </section>
+</body>
+
+</html>

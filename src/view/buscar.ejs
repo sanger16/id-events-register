@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Placa</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/img/icon.png" type="image/png">
+</head>
+
+<body>
+    <form action="/logout" method="post">
+        <button class="logout-button" type="submit">
+            <img src="/img/logout.svg" alt="cerrar sesion" class="logout-icon"> Salir
+        </button>
+    </form>
+    <% if (errors) { %>
+        <section class="error">
+            <% errors.forEach(error=> { %>
+                <p>
+                    <%= error.msg %>
+                </p>
+                <% }); %>
+        </section>
+        <% } %>
+            <% if (msg) { %>
+                <section class="messages">
+                    <% msg.forEach(m=> { %>
+                        <p>
+                            <%= m %>
+                        </p>
+                        <% }); %>
+                </section>
+                <% } %>
+                    <section class="panel">
+                        <img src="/img/logo.webp" alt="logo">
+                        <h3>Ingrese Placa</h3>
+                        <form action="/findPlate" method="post">
+                            <div class="container">
+                                <section>
+                                    <label for="plate">Placa a buscar</label>
+                                    <input id="plate" name="plate" type="text" required>
+                                </section>
+                                <button class="search" type="submit">Buscar</button>
+                            </div>
+                        </form>
+                    </section>
+                    <% if (plate.length> 0) { %>
+                        <section class="panel">
+                            <h3>Registro</h3>
+                            <% const obj=JSON.parse(plate) %>
+                                <form action="/register-supply" method="post">
+                                    <div class="container">
+                                        <input type="hidden" name="id" value="<%= id %>" hidden>
+                                        <section>
+                                            <input type="hidden" name="plateId" value="<%= obj.id %>" hidden>
+                                            <label for="plate2">Placa Registrada</label>
+                                            <input id="plate2" name="plate2" type="text" value="<%= obj.plate %>"
+                                                placeholder="<%= obj.plate %>" disabled>
+                                        </section>
+                                        <section>
+                                            <label for="qty">Cantidad (litros)</label>
+                                            <input id="qty" name="qty" type="number">
+                                        </section>
+                                        <% if (today[0]) { %>
+                                            <div class="advise">Este usuario surtió el día de hoy</div>
+                                            <% } else { %>
+                                                <button class="register" type="submit">Registrar Surtido hoy</button>
+                                                <% } %>
+                                    </div>
+                                </form>
+                        </section>
+                        <% } %>
+                            <!-- Historico -->
+                            <% if (history.length > 0) { %>
+                                <section class="panel">
+                                    <h3>Historial</h3>
+                                    <% //const obj=JSON.parse(plate) %>
+                                        <table>
+                                            <tr>
+                                                <th>Placa</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Cantidad</th>
+                                                <th>Autoriza</th>
+                                            </tr>
+                                            <% history.forEach(h=> { %>
+                                                <tr>
+                                                    <th>
+                                                        <%= h.plate %>
+                                                    </th>
+                                                    <th>
+                                                        <%= h.date %>
+                                                    </th>
+                                                    <th>
+                                                        <%= h.time %>
+                                                    </th>
+                                                    <th>
+                                                        <%= h.qty %>
+                                                    </th>
+                                                    <th>
+                                                        <%= h.username %>
+                                                    </th>
+                                                </tr>
+                                                <% }) %>
+                                        </table>
+                                </section>
+                                <% } %>
+</body>
+
+</html>
